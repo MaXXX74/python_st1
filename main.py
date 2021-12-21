@@ -1,8 +1,9 @@
-sum = square = 0
-while True:
-    num = int(input())
-    square += num ** 2
-    sum += num
-    if sum == 0:
-        break
-print(square)
+n = int(input())
+sch = 0
+for i in range(1, n+1):
+    for j in range(1, i+1):
+        if sch >= n:
+            break
+        else:
+            print(i, end=" ")
+            sch += 1
