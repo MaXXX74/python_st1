@@ -1,15 +1,38 @@
-# вводим первоначальные значения
-matrix = []
-while True:
-    s = input()
-    if s != "end":
-        matrix.append([int(i) for i in s.split()])
-    else:
-        break
-# расчет и вывод
-rows = len(matrix)
-cols = len(matrix[0])
-for x in range(rows):
-    for y in range(cols):
-        print(matrix[x-1][y] + matrix[(x+1) % rows][y] + matrix[x][y-1] + matrix[x][(y+1) % cols], end=" ")
+n = int(input())
+field = [n * [0] for i in range(n)]
+row = step = 0        # тек.строка, номер шага
+col = -1              # тек.колонка
+move = "right"        # тек.направление движения
+while step < n * n:
+    if (move == "right"):
+        if col < n-1 and field[row][col+1] == 0:
+            step += 1
+            field[row][col+1] = step
+            col += 1
+        else:
+            move = "down"
+    if (move == "down"):
+        if row < n-1 and field[row+1][col] == 0:
+            step += 1
+            field[row+1][col] = step
+            row += 1
+        else:
+            move = "left"
+    if (move == "left"):
+        if col > 0 and field[row][col-1] == 0:
+            step += 1
+            field[row][col-1] = step
+            col -= 1
+        else:
+            move = "up"
+    if (move == "up"):
+        if row > 0 and field[row-1][col] == 0:
+            step += 1
+            field[row-1][col] = step
+            row -= 1
+        else:
+            move = "right"
+for row in range(n):
+    for col in range(n):
+        print(field[row][col], end=" ")
     print()
